@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ArDrone2.Client\ArDrone2.Client.csproj" />
+    <ProjectReference Include="..\ArDrone2.Data\ArDrone2.Data.csproj" />
+    <ProjectReference Include="..\ArDrone2.Infrastructure\ArDrone2.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

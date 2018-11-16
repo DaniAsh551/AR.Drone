@@ -114,3 +114,4 @@ UpgradeLog*.XML
 
 # OS X
 .DS_Store
+/.vs/AR.Drone/v15/Server/sqlite3

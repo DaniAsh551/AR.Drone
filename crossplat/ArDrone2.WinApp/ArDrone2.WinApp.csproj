@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{51F129C8-F228-4D10-AF79-95AC42199944}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ArDrone2.WinApp</RootNamespace>
+    <AssemblyName>ArDrone2.WinApp</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FilePlayer.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayerForm.Designer.cs">
+      <DependentUpon>PlayerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TreeViewHelper.cs" />
+    <Compile Include="VideoHelper.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayerForm.resx">
+      <DependentUpon>PlayerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArDrone2.Avionics\ArDrone2.Avionics.csproj">
+      <Project>{260670af-1c53-4061-8bcb-3afa67748790}</Project>
+      <Name>ArDrone2.Avionics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArDrone2.Client\ArDrone2.Client.csproj">
+      <Project>{2fb289a0-a4ab-4903-83af-8c5bd2eb4c32}</Project>
+      <Name>ArDrone2.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArDrone2.Data\ArDrone2.Data.csproj">
+      <Project>{d116a93d-5bde-4e66-84f7-27ed905cb2a4}</Project>
+      <Name>ArDrone2.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArDrone2.Infrastructure\ArDrone2.Infrastructure.csproj">
+      <Project>{ba9ad383-db21-4dd1-95a9-5bf0d8230c42}</Project>
+      <Name>ArDrone2.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArDrone2.Media\ArDrone2.Media.csproj">
+      <Project>{65aa3db1-ab3a-414d-a0e9-19e5451b4b97}</Project>
+      <Name>ArDrone2.Media</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArDrone2.Video\ArDrone2.Video.csproj">
+      <Project>{39b36747-2a96-4f45-8867-edc74c792c90}</Project>
+      <Name>ArDrone2.Video</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FFmpeg.AutoGen.CrossPlat\FFmpeg.AutoGen.CrossPlat.csproj">
+      <Project>{86f50a50-7ad0-4048-ad9c-0c92351299e6}</Project>
+      <Name>FFmpeg.AutoGen.CrossPlat</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
