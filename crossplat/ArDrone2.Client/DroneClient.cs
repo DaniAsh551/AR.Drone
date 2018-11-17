@@ -357,6 +357,543 @@ namespace ArDrone2.Client
 
         #endregion
 
+        #region FlightMoveCommands
+        //Up
+        public void GoUp(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, 0, 0, 0, speed));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone go up while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoUpWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    GoUp(speed);
+            else
+                Task.Factory.StartNew(() => GoUpWhile(predicate, speed, false));
+        }
+
+        /// <summary>
+        /// Makes the drone go up until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoUpUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    GoUp(speed);
+            else
+                Task.Factory.StartNew(() => GoUpUntil(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go up for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoUpFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            GoUpUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone go up for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoUpFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            GoUpUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+
+        //Down
+        public void GoDown(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, 0, 0, 0, -1.0f * speed));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone go down while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoDownWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    GoDown(speed);
+            else
+                Task.Factory.StartNew(() => GoDownWhile(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go down until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoDownUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    GoDown(speed);
+            else
+                Task.Factory.StartNew(() => GoDownUntil(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go down for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoDownFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            GoDownUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone go down for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoDownFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            GoDownUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+
+        //Forward
+        public void GoForward(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, 0, -1.0f * speed, 0, 0));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone go forward while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoForwardWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    GoForward(speed);
+            else
+                Task.Factory.StartNew(() => GoForwardWhile(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go forward until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoForwardUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    GoForward(speed);
+            else
+                Task.Factory.StartNew(() => GoForwardUntil(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go forward for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoForwardFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            GoForwardUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone go forward for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoForwardFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            GoForwardUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+
+        //Backward
+        public void GoBack(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, 0, speed, 0, 0));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone go back while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoBackWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    GoBack(speed);
+            else
+                Task.Factory.StartNew(() => GoBackWhile(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go back until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoBackUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    GoBack(speed);
+            else
+                Task.Factory.StartNew(() => GoBackUntil(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go back for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoBackFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            GoBackUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone go back for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoBackFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            GoBackUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+
+        //Left
+
+        public void GoLeft(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, -1.0f * speed, 0, 0, 0));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone go Left while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoLeftWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    GoLeft(speed);
+            else
+                Task.Factory.StartNew(() => GoLeftWhile(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go Left until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoLeftUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    GoLeft(speed);
+            else
+                Task.Factory.StartNew(() => GoLeftUntil(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go Left for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoLeftFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            GoLeftUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone go Left for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoLeftFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            GoLeftUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        public void GoRight(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, speed, 0, 0, 0));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone go Right while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoRightWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    GoRight(speed);
+            else
+                Task.Factory.StartNew(() => GoRightWhile(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go Right until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void GoRightUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    GoRight(speed);
+            else
+                Task.Factory.StartNew(() => GoRightUntil(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone go Right for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoRightFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            GoRightUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone go Right for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void GoRightFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            GoRightUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+
+        //Left
+
+        public void TurnLeft(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, 0, 0, -1.0f * speed, 0));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone turn Left while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void TurnLeftWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    TurnLeft(speed);
+            else
+                Task.Factory.StartNew(() => TurnLeftWhile(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone turn Left until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void TurnLeftUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    TurnLeft(speed);
+            else
+                Task.Factory.StartNew(() => TurnLeftUntil(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone turn Left for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void TurnLeftFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            TurnLeftUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone turn Left for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void TurnLeftFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            TurnLeftUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+
+        //Turn Right
+        public void TurnRight(float speed = 1.0f)
+        {
+            if (speed >= 0.1)
+                Send(new ProgressCommand(FlightMode.Progressive, 0, 0, speed, 0));
+            else
+                throw new ArgumentOutOfRangeException(nameof(speed));
+        }
+
+        /// <summary>
+        /// Makes the drone turn Right while the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="predicate"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void TurnRightWhile(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (predicate(this))
+                    TurnRight(speed);
+            else
+                Task.Factory.StartNew(() => TurnRightWhile(predicate, speed, false));
+            
+        }
+
+        /// <summary>
+        /// Makes the drone turn Right until the given predicate is true.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        public void TurnRightUntil(Func<DroneClient, bool> predicate, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            if (blockUntilDone)
+                while (!predicate(this))
+                    TurnRight(speed);
+            else
+                Task.Factory.StartNew(() => TurnRightUntil(predicate, speed, false));
+        }
+
+        /// <summary>
+        /// Makes the drone turn Right for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="milliseconds"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void TurnRightFor(int milliseconds, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.AddMilliseconds(milliseconds);
+            TurnRightUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+
+        /// <summary>
+        /// Makes the drone turn Right for a specified length in time.
+        /// </summary>
+        /// <param name="speed"></param>
+        /// <param name="timeSpan"></param>
+        /// <param name="blockUntilDone">Whether the drone thread must be blocked until the execution finishes.</param>
+        /// <returns></returns>
+        public void TurnRightFor(TimeSpan timeSpan, float speed = 1.0f, bool blockUntilDone = false)
+        {
+            var until = DateTime.Now.Add(timeSpan);
+            TurnRightUntil(x => DateTime.Now >= until, speed, blockUntilDone);
+        }
+        
+        #endregion
+
+
         protected override void DisposeOverride()
         {
             base.DisposeOverride();

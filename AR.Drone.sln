@@ -26,21 +26,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AR.Drone.Avionics", "AR.Dro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "crossplat", "crossplat", "{4435A7D0-D24F-4A95-B132-FEEF90212067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.Infrastructure", "crossplat\ArDrone2.Infrastructure\ArDrone2.Infrastructure.csproj", "{BA9AD383-DB21-4DD1-95A9-5BF0D8230C42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArDrone2.Infrastructure", "crossplat\ArDrone2.Infrastructure\ArDrone2.Infrastructure.csproj", "{BA9AD383-DB21-4DD1-95A9-5BF0D8230C42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.Data", "crossplat\ArDrone2.Data\ArDrone2.Data.csproj", "{D116A93D-5BDE-4E66-84F7-27ED905CB2A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArDrone2.Data", "crossplat\ArDrone2.Data\ArDrone2.Data.csproj", "{D116A93D-5BDE-4E66-84F7-27ED905CB2A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.Media", "crossplat\ArDrone2.Media\ArDrone2.Media.csproj", "{65AA3DB1-AB3A-414D-A0E9-19E5451B4B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArDrone2.Media", "crossplat\ArDrone2.Media\ArDrone2.Media.csproj", "{65AA3DB1-AB3A-414D-A0E9-19E5451B4B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.Client", "crossplat\ArDrone2.Client\ArDrone2.Client.csproj", "{2FB289A0-A4AB-4903-83AF-8C5BD2EB4C32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArDrone2.Client", "crossplat\ArDrone2.Client\ArDrone2.Client.csproj", "{2FB289A0-A4AB-4903-83AF-8C5BD2EB4C32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.Avionics", "crossplat\ArDrone2.Avionics\ArDrone2.Avionics.csproj", "{260670AF-1C53-4061-8BCB-3AFA67748790}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArDrone2.Avionics", "crossplat\ArDrone2.Avionics\ArDrone2.Avionics.csproj", "{260670AF-1C53-4061-8BCB-3AFA67748790}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg.AutoGen.CrossPlat", "crossplat\FFmpeg.AutoGen.CrossPlat\FFmpeg.AutoGen.CrossPlat.csproj", "{86F50A50-7AD0-4048-AD9C-0C92351299E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FFmpeg.AutoGen.CrossPlat", "crossplat\FFmpeg.AutoGen.CrossPlat\FFmpeg.AutoGen.CrossPlat.csproj", "{86F50A50-7AD0-4048-AD9C-0C92351299E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.Video", "crossplat\ArDrone2.Video\ArDrone2.Video.csproj", "{39B36747-2A96-4F45-8867-EDC74C792C90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArDrone2.Video", "crossplat\ArDrone2.Video\ArDrone2.Video.csproj", "{39B36747-2A96-4F45-8867-EDC74C792C90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.WinApp", "crossplat\ArDrone2.WinApp\ArDrone2.WinApp.csproj", "{51F129C8-F228-4D10-AF79-95AC42199944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArDrone2.MissionPlan", "crossplat\ArDrone2.MissionPlan\ArDrone2.MissionPlan.csproj", "{035AC341-6B13-490D-9C75-713210875694}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,6 +114,10 @@ Global
 		{51F129C8-F228-4D10-AF79-95AC42199944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51F129C8-F228-4D10-AF79-95AC42199944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51F129C8-F228-4D10-AF79-95AC42199944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{035AC341-6B13-490D-9C75-713210875694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{035AC341-6B13-490D-9C75-713210875694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{035AC341-6B13-490D-9C75-713210875694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{035AC341-6B13-490D-9C75-713210875694}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +131,7 @@ Global
 		{86F50A50-7AD0-4048-AD9C-0C92351299E6} = {4435A7D0-D24F-4A95-B132-FEEF90212067}
 		{39B36747-2A96-4F45-8867-EDC74C792C90} = {4435A7D0-D24F-4A95-B132-FEEF90212067}
 		{51F129C8-F228-4D10-AF79-95AC42199944} = {4435A7D0-D24F-4A95-B132-FEEF90212067}
+		{035AC341-6B13-490D-9C75-713210875694} = {4435A7D0-D24F-4A95-B132-FEEF90212067}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0CB9B1EE-2499-48FE-9270-DD57A38BD191}
